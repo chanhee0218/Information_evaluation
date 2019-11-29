@@ -1,23 +1,23 @@
-var Rows = document.getElementById("rows");
-var Cols = document.getElementById("cols");
+var horizontal = document.getElementById("rows");
+var Vertical = document.getElementById("cols");
 var area = document.getElementById("area");
-var Closebtn = document.getElementById("setting_close_button");
-var SetBtn = document.getElementById("setting_setting_button");
-var Enablebtn = document.getElementById("setting_enable");
-var IdsetBtn = document.getElementById("setting_deskID");
-var SetNameBtn = document.getElementById("setting_name");
-var Set = document.getElementById("setting");
+var SetCloseBtn = document.getElementById("setting_close_button");
+var SetSetBtn = document.getElementById("setting_setting_button");
+var SetEnable = document.getElementById("setting_enable");
+var SetId = document.getElementById("setting_deskID");
+var SetName = document.getElementById("setting_name");
+var setting = document.getElementById("setting");
 var random = document.getElementById("random");
 
 var rows = 0;
 var cols = 0;
 var buttons = [];
 
-Closebtn.onclick = function(){
-  Set.style.display = "none";
+SetCloseBtn.onclick = function(){
+  setting.style.display = "none";
 }
 
-rows.oninput = function(){
+horizontal.oninput = function(){
   if(isNaN(this.value)){
     this.value = this.value.slice(0,-1);
   }else{
@@ -26,7 +26,7 @@ rows.oninput = function(){
   generate();
 }
 
-Cols.oninput = function(){
+Vertical.oninput = function(){
   if(isNaN(this.value)){
     this.value = this.value.slice(0,-1);
   }else{
@@ -35,31 +35,31 @@ Cols.oninput = function(){
   generate();
 }
 
-SetBtn.onclick = function(){
-  var id = parseInt(IdsetBtn.value);
-  if(SetNameBtn.value != ""){
-    buttons[id].name = SetNameBtn.value;
+SetSetBtn.onclick = function(){
+  var id = parseInt(SetId.value);
+  if(SetName.value != ""){
+    buttons[id].name = SetName.value;
     buttons[id].innerHTML = '<span style="font-size:0.5em;position:absolute;left:0px;top:0px">'+String(id)+'</span>';
-    buttons[id].innerHTML += SetNameBtn.value;
+    buttons[id].innerHTML += SetName.value;
   }else{
     buttons[id].name = "";
     buttons[id].innerHTML = '<span style="font-size:0.5em;position:absolute;left:0px;top:0px">'+String(id)+'</span>';
     buttons[id].innerHTML += '<span style="color:gray">이름 입력</span>';
   }
-  buttons[id].using = Enablebtn.checked;
+  buttons[id].using = SetEnable.checked;
   if(!buttons[id].using){
     buttons[id].innerHTML = '<span style="font-size:0.5em;position:absolute;left:0px;top:0px">'+String(id)+'</span>';
     buttons[id].innerHTML += '<span style="color:red">사용 안함</span>';
   }
-  Set.style.display = "none";
+  setting.style.display = "none";
 }
 
 random.onclick=function(){
-  var shuffle = [];
+  var Mix = [];
   var j=0;
   for(var i=0;i<buttons.length;i++){
     if(buttons[i].using){
-      shuffle[j] = buttons[i].name;
+      Mix[j] = buttons[i].name;
       j += 1;
     }
   }
@@ -70,7 +70,7 @@ random.onclick=function(){
   }
 
   // 섞기
-  shuffle = shuffle.sort(function(){return 0.5-Math.random()});
+  Mix = Mix.sort(function(){return 0.5-Math.random()});
 
   // 재배치
   var buttonsHTML = '';
@@ -89,16 +89,16 @@ random.onclick=function(){
   for(var i=0;i<cols*rows;i++){
     buttons[i] = document.getElementById(String(i));
     buttons[i].onclick = function(){
-      Set.style.display = "block";
-      Enablebtn.checked = this.using;
-      IdsetBtn.value = this.id;
-      SetNameBtn.value = this.name;
+      setting.style.display = "block";
+      SetEnable.checked = this.using;
+      SetId.value = this.id;
+      SetName.value = this.name;
     }
 
     buttons[i].innerHTML = '<span style="font-size:0.5em;position:absolute;left:0px;top:0px">'+String(i)+'</span>';
     buttons[i].using = using[i];
     if(buttons[i].using){
-      buttons[i].name = shuffle[j];
+      buttons[i].name = Mix[j];
       if(buttons[i].name == ""){
         buttons[i].innerHTML += '<span style="color:gray">이름 입력</span>';
       }else{
@@ -131,10 +131,10 @@ function generate(){
     for(var i=0;i<cols*rows;i++){
       buttons[i] = document.getElementById(String(i));
       buttons[i].onclick = function(){
-        Set.style.display = "block";
-        Enablebtn.checked = this.using;
-        IdsetBtn.value = this.id;
-        SetNameBtn.value = this.name;
+        setting.style.display = "block";
+        SetEnable.checked = this.using;
+        SetId.value = this.id;
+        SetName.value = this.name;
       }
       buttons[i].name = "";
       buttons[i].innerHTML = '<span style="font-size:0.5em;position:absolute;left:0px;top:0px">'+String(i)+'</span>';
