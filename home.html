@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+  <title>책상 자리 배치하기</title>
+  <meta charset="utf-8">
+  <style>
+  .desk{
+     background-color: #ffffff;
+	   width:120px;
+     height:60px;
+     padding:0px;
+     position: relative;
+  }
+  .desk:hover{
+    background-color: #d4d4d4;
+  }
+  .setting{
+    position:absolute;
+    top:50%;
+    left:50%;
+    background:#ffffff;
+    opacity:0.8;
+    transform:translate(-50%, -50%);
+    width:400px;height:120px;border:1px black solid;display:none;
+  }
+  </style>
+</head>
+<body>
+<h1>입력 창에 가로 세로 숫자를 입력 하세요!</h1>
+  <table align="center">
+    <tr><td colspan="2" align="center">책상 자리 배치하기</td></tr>
+    <tr><td>
+    <input type="text" placeholder="행(가로)" size="3" id="rows">
+    <input type="text" placeholder="열(세로)" size="3" id="cols">
+  </td><td align="right"><input type="button" id="random" value="자리 섞기" style="display:none;"></td></tr>
+    <tr><td colspan="2" align="center"><input type="text" value="교탁" style="text-align:center;width:300px"></td></tr>
+    <tr><td colspan="2" align="center"><div id="area"></div></td></tr>
+    <tr></tr>
+  </table>
+  <div class="setting" id="setting">
+  <table align="center">
+    <tr>
+      <td colspan="2">사용하지 않는 책상이면 체크 해제해주세요. :
+      <input type="checkbox" id="setting_enable" checked>
+      </td>
+    </tr>
+    <tr>
+      <td>책상 번호 : </td><td><input id="setting_deskID" readonly></td>
+    </tr>
+    <tr>
+      <td>이름 : </td><td><input id="setting_name"></td>
+    </tr>
+    <tr>
+      <td align="center" colspan="2">
+        <input type="button" id="setting_setting_button" value="설정">
+        <input type="button" id="setting_close_button" value="닫기">
+      </td>
+    </tr>
+  </table>
+  </div>
+<script src="javas.js"></script>
+</body>
+</html>
